@@ -73,14 +73,49 @@
 
 ### Значимые фрагменты кода
 
+*Функция генерации точек на карте*
+```js
+for (let i = 0; i < points.length; i++){
+    point = new ymaps.Placemark([points[i][1], points[i][2]],{
+      balloonContentHeader: 'Постамат №' + (i+1),
+      balloonContentFooter: points[i][3],
+      balloonMaxWidth: 200
+    }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'https://img.icons8.com/color/512/database.png',
+      iconImageSize: [30,30],
+      iconImageOffset: [-15,-11],
+    });
+    let placemark_body = 'постамат пустой)';
+    for (let j = 0; j < packs.length; j++){
+        if(packs[j][3] == i){
+            placemark_body = '';
+            placemark_body += 'номер посылки: ' + packs[j][1];
+            placemark_body += ', товар: ' + packs[j][2];
+            if (packs[j][4] == 2 || packs[j][4] == 3){
+                placemark_body += ', время доставки: ' + packs[j][4] + ' дня' + '<br>';
+            }
+            else if (packs[j][4] == 1){
+                placemark_body += ', время доставки: ' + packs[j][4] + ' день' + '<br>';
+            }
+            else {
+                placemark_body += ', время доставки: ' + packs[j][4] + ' дней' + '<br>';
+            }
+        } else {
+        }
+    }
+    point.properties.set({ balloonContentBody: placemark_body});
+    collection.add(point);
+}
+```
 ## Тестирование(smoketest)
 
 После реализации проекта было выполнено smoke-тестирование (проверка ключевых функций проекта). Результаты показали ожидаеммые ответы, как на ошибочные, так и на корректные данные.
 
 ## Внедрение
 
-Проект был опубликован в Интрнете через хостинг TimeWeb. Файловая организация анологична, как и в локальном. Структура баззы данных была импортированна и имеет идентичный вид.
+Проект был опубликован в Интрнете через хостинг. Файловая организация анологична, как и на локальном сервере. Структура баззы данных была импортированна и имеет идентичный вид.
 **Доступ к проекту:** 
 
 ## Поддержка
-добавление новых постаматов и посылок в DB
+Добавление новых постаматов и посылок в DB, по мере их появления.
