@@ -1,0 +1,28 @@
+.map{
+  float: inherit;
+  width: 1120px;
+  height: 500px;
+  background-color: #555;
+}
+
+[class*="ground-pane"] /*чб карта(там где есть grayscale 1)*/
+{
+  filter: grayscale(0);
+}
+
+[class*="copyrights-pane"]
+{
+  display: none !important;
+}
+
+h2{
+  text-align: center;
+}
+/*
+div{
+  text-align: center;
+}
+*/
+body{
+  background-color: #D1C4E9;
+}
